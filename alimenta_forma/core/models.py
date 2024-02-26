@@ -3,14 +3,23 @@ from django.db.models.signals import post_save
 from django.db import models
 
 class User(AbstractUser):
-    user = models.CharField(max_length= 50, blank=True, unique=True, verbose_name='Usuario')
-    first_name = models.CharField(max_length=50,  blank=True, verbose_name='Nombre')
-    last_name = models.CharField(max_length=50, blank=True, verbose_name='Apellido')
-    email = models.EmailField(max_length=50, blank=True, unique=True, verbose_name='Email' )
-
     class Meta:
     	verbose_name = 'usuario'
     	verbose_name_plural = 'usuarios'
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='core_user_groups',
+        blank=True,
+        verbose_name='Grupos'
+    )
+    
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='core_user_permissions',
+        blank=True,
+        verbose_name='Permisos'
+    )
 
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Usuario')
@@ -20,7 +29,7 @@ class Profile (models.Model):
     telephone = models.CharField(max_length=50, null=True, blank=True, verbose_name='Teléfono')
     created_by_admin = models.BooleanField(default=True, blank=True, verbose_name='Creado por Admin')
     age = models.IntegerField(blank=True, verbose_name='Edad')
-    city = models.CharField(maxlength=50, blank=True, verbose_name='Localidad')
+    city = models.CharField(max_length=50, blank=True, verbose_name='Localidad')
     preferred_language = models.CharField(max_length=50, blank=True) # Ver si puede elegir cualquier idioma o está limitado, es necesario?
 
     class Meta:
@@ -89,3 +98,36 @@ class Registration (models.Model):
     class Meta:
         verbose_name = 'Inscripcion'
         verbose_name_plural = 'Inscripciones'
+        
+class Mark (models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Curso')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'groups__name': 'estudiantes'}, verbose_name='Estudiante')
+    mark_1 = models.PositiveIntegerField(null=True, blank=True, verbose_name='Nota 1')
+    mark_2 = models.PositiveIntegerField(null=True, blank=True, verbose_name='Nota 2')
+    mark_3 = models.PositiveIntegerField(null=True, blank=True, verbose_name='Nota 3')
+    average = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True, verbose_name='Promedio')
+    
+    def __str__(self):
+        return str(self.course)
+    
+    # Calcular el promedio de las notas
+    def calculate_average (self):
+        marks = [self.mark_1, self.mark_2, self.mark_3]
+        valid_marks = [mark for mark in marks if mark is not None]
+        if valid_marks:
+            return sum(valid_marks) / len (valid_marks)
+        return None
+    
+    def save (self, *args, **kwargs):
+        if self.mark_1 or self.mark_2 or self.mark_3:
+            self.average = self.calculate_average()
+        super().save(*args, **kwargs)
+        
+    class Meta:
+        verbose_name = 'Nota'
+        verbose_name_plural = 'Notas'
+        
+class Suscription (models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='attendances', limit_choices_to={'groups__name': 'estudiantes'}, verbose_name='Estudiante')
+    date = models.DateField(null=True, blank=True, verbose_name='Fecha')
+    payment = models.BooleanField(default=False, blank=True, null=True, verbose_name='Presente')
