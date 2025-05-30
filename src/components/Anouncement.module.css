@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vw;
+    flex-direction: column;
+    align-content: center;
+    border: 3px solid var(--clr-bluer);
+    max-width: 95%;
+    margin: 2rem auto;
+    box-shadow: inset 2px 2px 16px 24px #22cbfe8d;
+}
+
+.container p {
+    text-align: center;
+    font-size: 20px;
+    padding: 15px;
+    font-weight: var(--fw-bold);
+}
+
+.container .p1 {
+    color: var(--clr-greener);
+}
+
+.container .p2 {
+    color: var(--clr-bluer)
+}

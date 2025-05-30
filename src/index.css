@@ -1,0 +1,109 @@
+/* font-family: "Inter", sans-serif; */
+*, 
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+/* Custom Properties --------------------------------------*/
+
+:root {
+	--ff-primary: 'Inter';
+
+	--fw-reg: 300;
+	--fw-bold: 900;
+
+	--clr-white: #fff;
+	--clr-bluer: #1ae5d9;
+	--clr-lightBlue: #22cafe;
+	--clr-LighterBlue: #51d4fc;
+	--clr-lighterGreen: #59d3cc;
+	--clr-lightGreen: #59d3b6;
+	--clr-green: #31bb99;
+	--clr-greener: #00ac82;
+
+	--fs-h1: 70px;
+	--fs-h2: 50px;
+	--fs-h3: 30px;
+	--fs-h4: 25px;
+	--fs-p: 18px;
+}
+
+@media screen and (max-width: 800px) {
+	:root {
+		--fs-h1: 50px;
+		--fs-h2: 35px;
+		--fs-h3: 25px;
+		--fs-h4: 20px;
+		--fs-p: 16px;
+		line-height: 1.0;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	:root {
+		--fs-h1: 25px;
+		--fs-h2: 22px;
+		--fs-h3: 20px;
+		--fs-h4: 18px;
+		--fs-p: 14px;
+	}
+}
+
+@media screen and (max-width: 430px) {
+	:root {
+		--fs-h1: 20px;
+		--fs-h2: 18px;
+		--fs-h3: 17px;
+		--fs-h4: 16px;
+		--fs-p: 12px;
+	}
+}
+
+/* General Styles ----------------------------------------------*/
+
+body {
+	background: var(--clr-white);
+	color: var(--clr-greener);
+	margin: 0;
+	font-family: var(--ff-primary);
+	font-size: var(--fs-p);
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul, 
+li, 
+p,
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Typography --------------------------------------------*/
+
+h1 {
+	font-size: var(--fs-h1);
+}
+
+h2 {
+	font-size: var(--fs-h2);
+}
+
+h3 {
+	font-size: var(--fs-h3);
+}
+
+h4 {
+	font-size: var(--fs-h4);
+}
+
+p {
+	font-size: var(--fs-p);
+}

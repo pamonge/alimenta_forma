@@ -1,0 +1,34 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+	width: 170px;
+	gap: 1rem;
+	font-size: 18px;
+	
+}
+
+.registerButton {
+	background-color: var(--clr-lightBlue);
+	color: var(--clr-white);
+	font-weight: var(--fw-bold);
+	height: 40px;
+	border: none;
+	border-radius: 7px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.loginButton {
+	background-color: var(--clr-greener);
+	color: var(--clr-white);
+	font-weight: var(--fw-bold);
+	height: 40px;
+	border: none;
+	border-radius: 7px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}

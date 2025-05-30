@@ -1,0 +1,80 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100px;
+	width: 95vw;
+	border-bottom: 3px solid var(--clr-bluer);
+	box-shadow: inset -1px -1px 10px var(--clr-LighterBlue);
+}
+
+.appName {
+	align-items: center;
+	margin: 0 1rem;
+}
+
+.appName h1, .appName h4 {
+	text-align: center; 
+	line-height: 0%;
+	text-transform: uppercase;
+}
+
+.appName h1 {
+	font-size: 30px;
+}
+
+.appName h4 {
+	font-size: 10px;
+	letter-spacing: 5px;
+}
+
+.icon {
+	font-size: 30px;
+}
+
+.hamburger {
+  display: none;
+  color: var(--clr-lighterGreen)
+}
+
+.menu {
+	display: flex;
+	margin-right: 2rem;
+}
+
+.menu li {
+	margin-right: 3rem;
+}
+
+@media screen and (max-width: 800px) {
+	.menu {
+		flex-direction: column;
+		position:absolute;
+		right: -300px;
+	}
+
+	.menuActive {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		position:absolute;
+		right: 23px;
+		min-height: 250px;
+		background: linear-gradient(to top, var(--clr-green), var(--clr-bluer) );
+		color: white;
+		font-weight: var(--fw-bold);
+		font-size: 14px;
+		justify-content: space-evenly;
+	}
+
+	.menuActive a {
+		margin: 30px 15px;
+		text-align: center;
+	
+	}
+
+	.hamburger {
+		display: initial;
+		margin-right: 20px;
+	}
+}

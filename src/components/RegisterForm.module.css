@@ -1,0 +1,21 @@
+.container {
+	margin: 2rem auto;
+	max-width: 200px;
+}
+
+.form label{
+	margin: 1rem 0;
+}
+
+.form input {
+	margin: 1rem 0;
+}
+
+.form p {
+	text-align: justify;
+}
+
+.form button {
+	width: 100%;
+	margin: 20px 0;
+}
